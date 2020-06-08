@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { ShizukaEngine } from '../Shizuka';
+import PluginInterface from '../Interfaces/PluginInterface';
 
 const PLUGINS_FOLDER = path.join(__dirname, '../Plugins');
 
@@ -34,7 +35,7 @@ class PluginLoaderBase {
 
     public getPlugins(pluginList?: string[]) {
         const pluginsNames: string[] = pluginList ? pluginList : this.getPluginsNames();
-        const plugins: Map<string, any> = new Map();
+        const plugins: Map<string, PluginInterface> = new Map();
 
         pluginsNames.forEach(pluginName => {
             this.addPluginToMap(pluginName, plugins);

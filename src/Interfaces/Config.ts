@@ -1,5 +1,5 @@
 interface Config {
-    token: string,
+    timezone: number,
     singleServer: boolean,
     serverId?: number,
     plugins?: string[] 
