@@ -31,9 +31,9 @@ class ShizukaEngine extends Client {
 
     private loadPlugins() {
         if (this.config.plugins !== undefined) {
-            this.Plugins = this.PluginLoader.getPlugins(this.config.plugins);
+            this.PluginLoader.getPlugins(this.Plugins, this.config.plugins);
         } else {
-            this.Plugins = this.PluginLoader.getPlugins();
+            this.PluginLoader.getPlugins(this.Plugins);
         }
     }
 

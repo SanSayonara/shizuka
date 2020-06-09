@@ -33,15 +33,12 @@ class PluginLoaderBase {
         pluginMap.set(pluginName, new PluginBase(this.shizukaInstance));
     }
 
-    public getPlugins(pluginList?: string[]) {
+    public getPlugins(pluginsMap: Map<string, PluginInterface>, pluginList?: string[]) {
         const pluginsNames: string[] = pluginList ? pluginList : this.getPluginsNames();
-        const plugins: Map<string, PluginInterface> = new Map();
 
         pluginsNames.forEach(pluginName => {
-            this.addPluginToMap(pluginName, plugins);
+            this.addPluginToMap(pluginName, pluginsMap);
         });
-
-        return plugins;
     }
 }
 
