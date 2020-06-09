@@ -3,6 +3,7 @@ import { Message } from 'discord.js';
 import PluginInterface from '../../Interfaces/PluginInterface';
 import TimerConfig from '../../Interfaces/TimerConfig';
 import CommandProcessor from '../CommandProcessor';
+import Logger from '../../Shizuka/Logger';
 
 class Example implements PluginInterface {
     static requirements: string[] = ["CommandProcessor"];
@@ -11,17 +12,18 @@ class Example implements PluginInterface {
         time: '1m',
         isAbsolute: false
     }];
+
     private shizuka: ShizukaEngine;
+    private Logger: Logger;
 
     private command: CommandProcessor;
 
-    constructor(shizuka: ShizukaEngine) {
+    constructor(shizuka: ShizukaEngine, logger: Logger) {
         this.shizuka = shizuka;
+        this.Logger = logger;
         this.command = this.shizuka.Plugins.get("CommandProcessor")!;
 
         this.command.on("example", this.exampleCommandHandler.bind(this));
-
-        console.log("Example plugin loaded successfully!")
     }
 
     public exampleCommandHandler(message: Message, args: string[]): void {
@@ -29,7 +31,7 @@ class Example implements PluginInterface {
     }
 
     public exampleTimer(): void {
-        console.log("timed! (this word exists?)");
+        this.Logger.debug("timed! (this word exists?)");
     }
 }
 

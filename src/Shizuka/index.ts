@@ -5,11 +5,13 @@ import TimerConfig from '../Interfaces/TimerConfig';
 
 import Time from './time';
 import PluginLoaderBase from './pluginLoader';
+import Logger from './Logger';
 
 class ShizukaEngine extends Client {
     protected config: Config;
+    protected Logger: Logger;
     public TimeUtils: Time;
-    public PluginLoader: PluginLoaderBase = new PluginLoaderBase(this);
+    public PluginLoader: PluginLoaderBase;
     public Plugins: Map<string, any> = new Map();
     public singleServer?: Channel;
     public server?: any;
@@ -17,7 +19,11 @@ class ShizukaEngine extends Client {
     constructor(config: Config) {
         super();
         this.config = config;
-        this.TimeUtils = new Time(config.timezone);
+        this.Logger = new Logger("[ENGINE]", this.config.logLevel);
+        this.TimeUtils = new Time(this.config.timezone);
+        this.PluginLoader = new PluginLoaderBase(this, this.config.logLevel);
+
+        this.Logger.info("Starting new Shizuka instance...")
 
         if (config.singleServer) {
             this.addSingleServerFunctionalities(config.serverId);
@@ -25,15 +31,15 @@ class ShizukaEngine extends Client {
 
         this.loadPlugins();
         this.startTimers();
-
-        //this.on("message", message => console.log(message))
     }
 
     private loadPlugins() {
+        this.Logger.info("Loading plugins...");
+
         if (this.config.plugins !== undefined) {
-            this.PluginLoader.getPlugins(this.Plugins, this.config.plugins);
+            this.PluginLoader.loadPlugins(this.Plugins, this.config.plugins);
         } else {
-            this.PluginLoader.getPlugins(this.Plugins);
+            this.PluginLoader.loadPlugins(this.Plugins);
         }
     }
 
@@ -42,7 +48,11 @@ class ShizukaEngine extends Client {
     }
 
     private startTimers() {
-        this.Plugins.forEach(plugin => {
+        this.Logger.debug("Starting timers...");
+
+        this.Plugins.forEach((plugin, pluginName) => {
+            this.Logger.debug(`Starting ${pluginName} timers...`);
+
             plugin.timers.forEach((timerConfig: TimerConfig) => {
                 timerConfig.method = timerConfig.method.bind(plugin);
                 //@ts-ignore
