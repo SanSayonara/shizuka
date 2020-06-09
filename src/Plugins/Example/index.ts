@@ -1,4 +1,5 @@
 import { ShizukaEngine } from '../../Shizuka'
+import { Message } from 'discord.js';
 
 class Example {
     static requirements: string[] = ["CommandProcessor"];
@@ -14,16 +15,17 @@ class Example {
     constructor(shizuka: ShizukaEngine) {
         this.shizuka = shizuka;
         this.command = this.shizuka.Plugins.get("CommandProcessor");
-        console.log(this.command);
 
-        this.command.on("siria", (message: any, args: any) => {
-            message.reply("viva Siria!");
-        })
+        this.command.on("example", this.exampleCommandHandler.bind(this));
 
         console.log("Example plugin loaded successfully!")
     }
 
-    exampleTimer() {
+    public exampleCommandHandler(message: Message, args: string[]) {
+        message.reply("Ohayou gozaimasu! ^^")
+    }
+
+    public exampleTimer() {
         console.log("timed! (this word exists?)");
     }
 }
