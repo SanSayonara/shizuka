@@ -2,8 +2,9 @@ import { ShizukaEngine } from '../../Shizuka'
 import { Message } from 'discord.js';
 
 import { EventEmitter } from 'events';
+import PluginInterface from '../../Interfaces/PluginInterface';
 
-class CommandProcessor extends EventEmitter {
+class CommandProcessor extends EventEmitter implements PluginInterface {
     static requirements: string[] = []
     public timers = [];
     private shizuka: ShizukaEngine;
@@ -38,3 +39,4 @@ class CommandProcessor extends EventEmitter {
 }
 
 module.exports = CommandProcessor;
+export default CommandProcessor;

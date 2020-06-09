@@ -1,5 +1,5 @@
 interface TimerConfig {
-    method: () => never,
+    method: () => void,
     time: string,
     isAbsolute: boolean
 }

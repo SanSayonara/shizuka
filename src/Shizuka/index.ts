@@ -10,7 +10,7 @@ class ShizukaEngine extends Client {
     protected config: Config;
     public TimeUtils: Time;
     public PluginLoader: PluginLoaderBase = new PluginLoaderBase(this);
-    public Plugins: Map<string, PluginInterface> = new Map();
+    public Plugins: Map<string, any> = new Map();
     public singleServer?: Channel;
     public server?: any;
 
@@ -43,7 +43,7 @@ class ShizukaEngine extends Client {
 
     private startTimers() {
         this.Plugins.forEach(plugin => {
-            plugin.timers.forEach(timerConfig => {
+            plugin.timers.forEach((timerConfig: TimerConfig) => {
                 timerConfig.method = timerConfig.method.bind(plugin);
                 //@ts-ignore
                 this.addTimer(timerConfig)
