@@ -19,12 +19,10 @@ npm run build
 
 ## Usage
 
-```python
-import foobar
+Simply use the start command:
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+``` 
+npm run start
 ```
 
 ## Contributing
