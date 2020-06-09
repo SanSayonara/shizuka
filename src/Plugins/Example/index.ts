@@ -23,7 +23,7 @@ class Example implements PluginInterface {
         this.Logger = logger;
         this.command = this.shizuka.Plugins.get("CommandProcessor")!;
 
-        this.command.on("example", this.exampleCommandHandler.bind(this));
+        this.command.onCommand("example", this.exampleCommandHandler.bind(this));
     }
 
     public exampleCommandHandler(message: Message, args: string[]): void {
