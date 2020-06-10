@@ -1,6 +1,6 @@
 # Shizuka: An easy way to create Discord bots with reusable code.
 
-The title says what it is, I create Shizuka to develop my Discord bots faster using a plugin system, advanced timers and better functionalities for single-server bots (to do).
+The title says what it is, I created Shizuka to develop my Discord bots faster using a plugin system, advanced timers and better functionalities for single-server bots (to do).
 
 ## Installation
 
