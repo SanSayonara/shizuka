@@ -3,7 +3,7 @@
         "token": "oursupersecrettoken"
     },
     "config": {
-        "timeZone": -4,
+        "timezone": -4,
         "singleServer": false,
         "serverId": 0,
         "logLevel": "INFO"
