@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { ShizukaEngine } from '../Shizuka';
-import PluginInterface from '../Interfaces/PluginInterface';
+import PluginFilesManager from './pluginFilesManager';
 import Logger from './Logger';
 
 const PLUGINS_FOLDER = path.join(__dirname, '../Plugins');
@@ -26,6 +26,7 @@ class PluginLoaderBase {
     public addPluginToMap(pluginName: string, pluginMap: Map<string, Object>) {
         const PluginBase = require(`../Plugins/${pluginName}`);
         const PluginLogger = new Logger(`[PLUGINS][${pluginName}]`, this.logLevel);
+        const PluginFilesManagerInstance = new PluginFilesManager(pluginName);
         const requirements = PluginBase.requirements;
 
         if (pluginMap.has(pluginName)) {
@@ -36,7 +37,7 @@ class PluginLoaderBase {
             this.addPluginToMap(requiredPluginName, pluginMap);
         });
 
-        pluginMap.set(pluginName, new PluginBase(this.shizukaInstance, PluginLogger));
+        pluginMap.set(pluginName, new PluginBase(this.shizukaInstance, PluginLogger, PluginFilesManagerInstance));
 
         this.Logger.info(`Plugin ${pluginName} loaded successfully`);
     }
