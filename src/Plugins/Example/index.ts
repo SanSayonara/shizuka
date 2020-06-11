@@ -5,6 +5,7 @@ import TimerConfig from '../../Interfaces/TimerConfig';
 import CommandProcessor from '../CommandProcessor';
 import Logger from '../../Shizuka/Logger';
 import pluginFilesManager from '../../Shizuka/pluginFilesManager';
+import PluginDataManager from '../../Shizuka/pluginDataManager';
 
 class Example implements PluginInterface {
     static requirements: string[] = ["CommandProcessor"];
@@ -17,18 +18,21 @@ class Example implements PluginInterface {
     private shizuka: ShizukaEngine;
     private Logger: Logger;
     private fileManager: pluginFilesManager;
+    private dataManager: PluginDataManager;
 
     private command: CommandProcessor;
 
-    constructor(shizuka: ShizukaEngine, logger: Logger, fileManager: pluginFilesManager) {
+    constructor(shizuka: ShizukaEngine, logger: Logger, fileManager: pluginFilesManager, dataManager: any) {
         this.shizuka = shizuka;
         this.Logger = logger;
         this.fileManager = fileManager;
+        this.dataManager = new dataManager({});
         this.command = this.shizuka.Plugins.get("CommandProcessor")!;
 
         this.command.onCommand("example", this.exampleCommandHandler.bind(this));
 
         this.exampleFileManagerUsage();
+        this.saveGreeting("Ohayou gozaimasu! ^^");
     }
 
     public async exampleFileManagerUsage() {
@@ -50,8 +54,12 @@ class Example implements PluginInterface {
         }
     }
 
+    public saveGreeting(greeting: string) {
+        this.dataManager.data["greeting"] = greeting;
+    }
+
     public exampleCommandHandler(message: Message, args: string[]): void {
-        message.reply("Ohayou gozaimasu! ^^")
+        message.reply(this.dataManager.data.greeting);
     }
 
     public exampleTimer(): void {
