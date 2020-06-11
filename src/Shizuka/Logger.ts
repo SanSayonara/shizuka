@@ -37,33 +37,33 @@ class Logger {
         }
     }
 
-    public critical(message: any): void {
+    public critical(message: any, ...args: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.CRITICAL) {
-            console.error(`${this.loggerName}[CRITICAL]: ${message}`);
+            console.error(`${this.loggerName}[CRITICAL]: ${message}`, ...args);
         }
     }
 
-    public error(message: any): void {
+    public error(message: any, ...args: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.ERROR) {
-            console.error(`${this.loggerName}[ERROR]: ${message}`);
+            console.error(`${this.loggerName}[ERROR]: ${message}`, ...args);
         }
     }
 
-    public warning(message: any): void {
+    public warning(message: any, ...args: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.WARNING) {
-            console.warn(`${this.loggerName}[WARNING]: ${message}`);
+            console.warn(`${this.loggerName}[WARNING]: ${message}`, ...args);
         }
     }
 
-    public info(message: any): void {
+    public info(message: any, ...args: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.INFO) {
-            console.info(`${this.loggerName}[INFO]: ${message}`);
+            console.info(`${this.loggerName}[INFO]: ${message}`, ...args);
         }
     }
 
-    public debug(message: any): void {
+    public debug(message: any, ...args: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.DEBUG) {
-            console.debug(`${this.loggerName}[DEBUG]: ${message}`);
+            console.debug(`${this.loggerName}[DEBUG]: ${message}`, ...args);
         }
     }
 }
