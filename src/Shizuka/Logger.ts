@@ -37,31 +37,31 @@ class Logger {
         }
     }
 
-    public critical(message: string): void {
+    public critical(message: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.CRITICAL) {
             console.error(`${this.loggerName}[CRITICAL]: ${message}`);
         }
     }
 
-    public error(message: string): void {
+    public error(message: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.ERROR) {
             console.error(`${this.loggerName}[ERROR]: ${message}`);
         }
     }
 
-    public warning(message: string): void {
+    public warning(message: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.WARNING) {
             console.warn(`${this.loggerName}[WARNING]: ${message}`);
         }
     }
 
-    public info(message: string): void {
+    public info(message: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.INFO) {
             console.info(`${this.loggerName}[INFO]: ${message}`);
         }
     }
 
-    public debug(message: string): void {
+    public debug(message: any): void {
         if (this.loggerLevel <= Logger.LEVELS_VALUES.DEBUG) {
             console.debug(`${this.loggerName}[DEBUG]: ${message}`);
         }
